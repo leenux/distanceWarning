@@ -1,0 +1,9 @@
+#
+## Interface: 11200
+## Title: DistanceWarning V 1.7.0
+## Notes:
+## Author: 卡特铁角
+## SavedVariables: DISTANCEWARNING_SAVE
+## OptionalDeps:
+## Dependencies: 
+DistanceWarning.xml
