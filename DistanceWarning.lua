@@ -273,20 +273,20 @@ function DistanceWarning_OnEvent(event,arg1)
 			if(DW_TOWNWATCH_RANK~=rank0) then
 				ChatFrame1:AddMessage("天赋配置改变:",1,0,0); 
 				ChatFrame1:AddMessage("鹰眼等级:"..DW_TOWNWATCH_RANK,1,1,0);
-				if(DW_ATTACK_ACTION_SLOT[15+rank0*2]~=nil) then
-					if(DW_ATTACK_ACTION_SLOT[15+DW_TOWNWATCH_RANK*2]==nil) then
-						DW_ATTACK_NEEDSCAN[15+DW_TOWNWATCH_RANK*2]=true;
+				if(DW_ATTACK_ACTION_SLOT[15+rank0*3]~=nil) then
+					if(DW_ATTACK_ACTION_SLOT[15+DW_TOWNWATCH_RANK*3]==nil) then
+						DW_ATTACK_NEEDSCAN[15+DW_TOWNWATCH_RANK*3]=true;
 					end
-					DW_ATTACK_ACTION_SLOT[15+rank0*2]=nil;
-					DW_ATTACK_NEEDSCAN[15+rank0*2]=true;
+					DW_ATTACK_ACTION_SLOT[15+rank0*3]=nil;
+					DW_ATTACK_NEEDSCAN[15+rank0*3]=true;
 					DW_NEEDSCAN=true;
 				end
-				if(DW_ATTACK_ACTION_SLOT[35+rank0*2]~=nil) then
-					if(DW_ATTACK_ACTION_SLOT[35+DW_TOWNWATCH_RANK*2]==nil) then
-						DW_ATTACK_NEEDSCAN[35+DW_TOWNWATCH_RANK*2]=true;
+				if(DW_ATTACK_ACTION_SLOT[35+rank0*3]~=nil) then
+					if(DW_ATTACK_ACTION_SLOT[35+DW_TOWNWATCH_RANK*3]==nil) then
+						DW_ATTACK_NEEDSCAN[35+DW_TOWNWATCH_RANK*3]=true;
 					end
-					DW_ATTACK_ACTION_SLOT[35+rank0*2]=nil;
-					DW_ATTACK_NEEDSCAN[35+rank0*2]=true;
+					DW_ATTACK_ACTION_SLOT[35+rank0*3]=nil;
+					DW_ATTACK_NEEDSCAN[35+rank0*3]=true;
 					DW_NEEDSCAN=true;
 				end
 			end
@@ -572,9 +572,9 @@ function DistanceWarning_OnUpdate()
 				ChatFrame1:AddMessage("鹰眼等级:"..DW_TOWNWATCH_RANK,1,1,0);
 				DW_ATTACK_NEEDSCAN[5]=true;
 				DW_ATTACK_NEEDSCAN[8]=true;
-				DW_ATTACK_NEEDSCAN[15+DW_TOWNWATCH_RANK*2]=true;
+				DW_ATTACK_NEEDSCAN[15+DW_TOWNWATCH_RANK*3]=true;
 				DW_ATTACK_NEEDSCAN[30]=true;
-				DW_ATTACK_NEEDSCAN[35+DW_TOWNWATCH_RANK*2]=true;
+				DW_ATTACK_NEEDSCAN[35+DW_TOWNWATCH_RANK*3]=true;
 				DW_ASSIST_NEEDSCAN[15]=true;
 				DW_NEEDSCAN=true;
 			end
@@ -894,17 +894,17 @@ function DistanceWarning_SpellDetector(slot)
 				yard=8;
 				ChatFrame1:AddMessage(DW_MSG1..ActionName..DW_MSG2..yard.."码",1,1,0);
 			end
-			if(DW_ATTACK_ACTION_SLOT[15+DW_TOWNWATCH_RANK*2]==nil and (ActionName=="Scatter Shot")) then
-				yard=15+DW_TOWNWATCH_RANK*2;
+			if(DW_ATTACK_ACTION_SLOT[15+DW_TOWNWATCH_RANK*3]==nil and (ActionName=="Scatter Shot")) then
+				yard=15+DW_TOWNWATCH_RANK*3;
 				DW_ATTACK_ACTION_SLOT[yard]=slot;
 				DW_ATTACK_NEEDSCAN[yard]=false;
 				ChatFrame1:AddMessage(DW_MSG1..ActionName..DW_MSG2..yard.."码",1,1,0);
 			end
-			if(DW_ATTACK_ACTION_SLOT[35+DW_TOWNWATCH_RANK*2]==nil and (ActionName=="Viper Sting" 
+			if(DW_ATTACK_ACTION_SLOT[35+DW_TOWNWATCH_RANK*3]==nil and (ActionName=="Viper Sting" 
 			or ActionName=="Serpent Sting" or ActionName=="Arcane Shot" or ActionName=="Concussive Shot" 
 			or ActionName=="Multi-Shot" or ActionName=="Aimed Shot" or ActionName=="Scorpid Sting" 
 			or ActionName=="Auto Shot" or ActionName=="Wyvern Sting" or ActionName=="Tranquilizing Shot")) then
-				yard=35+DW_TOWNWATCH_RANK*2;
+				yard=35+DW_TOWNWATCH_RANK*3;
 				DW_ATTACK_ACTION_SLOT[yard]=slot;
 				DW_ATTACK_NEEDSCAN[yard]=false;
 				ChatFrame1:AddMessage(DW_MSG1..ActionName..DW_MSG2..yard.."码",1,1,0);
@@ -1278,8 +1278,8 @@ function DistanceWarning_CheckScanNeed()
 	local needscan
 	if(DW_PLAYER_CLASS=="Hunter") then
 		needscan=(DW_ATTACK_NEEDSCAN[5] or DW_ATTACK_NEEDSCAN[8] 
-		or DW_ATTACK_NEEDSCAN[15+DW_TOWNWATCH_RANK*2] or DW_ATTACK_NEEDSCAN[30] 
-		or DW_ATTACK_NEEDSCAN[35+DW_TOWNWATCH_RANK*2] or DW_ASSIST_NEEDSCAN[15]);
+		or DW_ATTACK_NEEDSCAN[15+DW_TOWNWATCH_RANK*3] or DW_ATTACK_NEEDSCAN[30] 
+		or DW_ATTACK_NEEDSCAN[35+DW_TOWNWATCH_RANK*3] or DW_ASSIST_NEEDSCAN[15]);
 	elseif(DW_PLAYER_CLASS=="Warrior") then
 		needscan=(DW_ATTACK_NEEDSCAN[5] or DW_ATTACK_NEEDSCAN[8] or DW_ATTACK_NEEDSCAN[10] 
 		or DW_ATTACK_NEEDSCAN[25] or DW_ATTACK_NEEDSCAN[30] or DW_ASSIST_NEEDSCAN[15]);
@@ -1328,11 +1328,11 @@ function DistanceWarning_SetStatusBar(maxdis,mindis)
 			DistanceWarningFrameStatusBar:SetStatusBarColor(1,1,0);
 		elseif(maxdis<=8) then
 			DistanceWarningFrameStatusBar:SetStatusBarColor(1,0,0);
-		elseif(maxdis<=15+DW_TOWNWATCH_RANK*2) then
+		elseif(maxdis<=15+DW_TOWNWATCH_RANK*3) then
 			DistanceWarningFrameStatusBar:SetStatusBarColor(1,1,0);
 		elseif(maxdis<=30) then
 			DistanceWarningFrameStatusBar:SetStatusBarColor(1,0.5,0);
-		elseif(maxdis<=35+DW_TOWNWATCH_RANK*2) then
+		elseif(maxdis<=35+DW_TOWNWATCH_RANK*3) then
 			DistanceWarningFrameStatusBar:SetStatusBarColor(0,1,0);
 		else
 			DistanceWarningFrameStatusBar:SetStatusBarColor(0,0,1);
