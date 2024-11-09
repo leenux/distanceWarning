@@ -264,7 +264,7 @@ function DistanceWarning_OnEvent(event,arg1)
 	if(event=="CHARACTER_POINTS_CHANGED" and DW_DETECT==1) then
 		if(DW_PLAYER_CLASS=="Hunter") then
 			local rank0=DW_TOWNWATCH_RANK;
-			local _,texture,_,_,rank,_,_,_=GetTalentInfo(2,7);
+			local _,texture,_,_,rank,_,_,_=GetTalentInfo(2,5);
 			if(not(texture) or rank==nil) then
 				DW_TOWNWATCH_RANK=0;
 			else
@@ -559,7 +559,7 @@ function DistanceWarning_OnUpdate()
 	--等天赋树装载完毕以初始化需要扫描的技能
 	if(not(DW_TALENTTAB_LOADED)) then
 		if(DW_PLAYER_CLASS=="Hunter") then
-			local _,texture,_,_,rank,_,_,_=GetTalentInfo(2,7);
+			local _,texture,_,_,rank,_,_,_=GetTalentInfo(2,5);
 			if(DW_PLAYER_LEVEL<10) then
 				DW_TOWNWATCH_RANK=0;
 				DW_TALENTTAB_LOADED=true;
